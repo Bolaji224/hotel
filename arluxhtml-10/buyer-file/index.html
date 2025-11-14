@@ -143,12 +143,6 @@
                                 
                             </div>
                             <a href="contact.html" class="gt-theme-btn">BOOK NOW</a>
-                            <div class="social-icon d-flex align-items-center">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -623,21 +617,23 @@
                     </form>
                 </div>
             </div>
-      <div class="gt-booking-reserve-video parallaxie bg-cover">
-  <div class="gt-video-items">
-    <video
-      id="hotelVideo"
-      src="assets/img/DE DOVE DELUXE HOTEL.mp4"
-      muted
-      loop
-      playsinline
-      preload="metadata"
-    ></video>
+     <div class="gt-booking-reserve-video" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+  <!-- Vimeo iframe -->
+  <iframe
+    id="hotelVideo"
+    src="https://player.vimeo.com/video/1136824796?background=1&loop=1&autoplay=1&muted=1"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+    allowfullscreen
+    style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;"
+    title="DE DOVE DELUXE HOTEL"
+  ></iframe>
 
-    <button id="playButton" class="video-play-btn">
-      <i class="fa-solid fa-play"></i>
-    </button>
-  </div>
+  <!-- Play button for mobile -->
+  <button id="playButton" class="video-play-btn"
+          style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:10; font-size:2rem; display:none; background:rgba(0,0,0,0.5); border:none; border-radius:50%; width:60px; height:60px; color:white; cursor:pointer;">
+    <i class="fa-solid fa-play"></i>
+  </button>
 </div>
 
         </section>
@@ -1203,6 +1199,25 @@
         });
     });
   });
+</script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  const iframe = document.getElementById('hotelVideo');
+  const playBtn = document.getElementById('playButton');
+
+  // Detect mobile devices
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    iframe.style.display = 'none';  // hide iframe initially
+    playBtn.style.display = 'block'; // show play button
+
+    playBtn.addEventListener('click', () => {
+      iframe.style.display = 'block';
+      playBtn.style.display = 'none';
+      const player = new Vimeo.Player(iframe);
+      player.play();
+    });
+  }
 </script>
 
         
